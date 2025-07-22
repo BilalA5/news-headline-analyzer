@@ -1,12 +1,12 @@
 import requests as rq
 
-url = input("Enter a valid url")
+url = input("Enter a valid URL")
 
-while true:
-  if url.__contains__("http"):
+while True:
+  if "http" in url:
     break
   else:
-    url = input("Enter a valid url")
+    url = input("Enter a valid URL")
 
 response = rq.get(url)
 html = response.text
