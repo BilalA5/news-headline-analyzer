@@ -24,13 +24,28 @@ if headlines:
 else:
   print("No headlines found on the page.")
 
-# Example of using pandas to create a DataFrame from the headlines
+#using pandas to create a DataFrame from the headlines
 df = pd.DataFrame(headlines, columns=['Headlines'])
 # Display the DataFrame
 print("\nDataFrame created from headlines:")
 print(df)
-# Example of using numpy to perform some operations on the DataFrame
+#using numpy to perform some operations on the DataFrame
 if not df.empty:
     df['Length'] = df['Headlines'].apply(len)
     print("\nDataFrame with headline lengths:")
     print(df)
+# using matplotlib to visualize the lengths of the headlines
+if headlines:
+    plt.figure(figsize=(10, 5))
+    plt.bar(df['Headlines'], df['Length'], color='blue')
+    plt.xlabel('Headlines')
+    plt.ylabel('Length of Headline')
+    plt.title('Length of Headlines')
+    plt.xticks(rotation=45, ha='right')
+    plt.tight_layout()
+    plt.show()
+else:
+    print("No headlines to visualize.")
+print("DataFrame saved to 'headlines.csv'.")
+# Save the DataFrame to an Excel file
+df.to_excel('headlines.xlsx', index=False)
