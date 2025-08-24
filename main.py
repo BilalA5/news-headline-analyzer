@@ -23,3 +23,14 @@ if headlines:
     print(f"{idx}: {headline}")
 else:
   print("No headlines found on the page.")
+
+# Example of using pandas to create a DataFrame from the headlines
+df = pd.DataFrame(headlines, columns=['Headlines'])
+# Display the DataFrame
+print("\nDataFrame created from headlines:")
+print(df)
+# Example of using numpy to perform some operations on the DataFrame
+if not df.empty:
+    df['Length'] = df['Headlines'].apply(len)
+    print("\nDataFrame with headline lengths:")
+    print(df)
