@@ -14,7 +14,7 @@ while True:
 
 response = rq.get(url)
 html = response.text
-soup = bs.BeautifulSoup(html, 'html.parser')
+soup = BeautifulSoup(html, 'html.parser')
 headlines = [headline.get_text() for headline in soup.find_all('h1')]
 
 if headlines:
