@@ -46,6 +46,8 @@ if headlines:
     plt.show()
 else:
     print("No headlines to visualize.")
-print("DataFrame saved to 'headlines.csv'.")
+    
 # Save the DataFrame to an Excel file
 df.to_excel('headlines.xlsx', index=False)
+print("DataFrame saved to 'headlines.xlsx'.")
+
