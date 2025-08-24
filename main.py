@@ -2,7 +2,7 @@ import requests as rq
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
-import BeautifulSoup as bs
+from bs4 import BeautifulSoup
 
 url = input("Enter a valid URL")
 
@@ -46,7 +46,7 @@ if headlines:
     plt.show()
 else:
     print("No headlines to visualize.")
-    
+
 # Save the DataFrame to an Excel file
 df.to_excel('headlines.xlsx', index=False)
 print("DataFrame saved to 'headlines.xlsx'.")
