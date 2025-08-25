@@ -4,19 +4,20 @@ import numpy as np
 import matplotlib.pyplot as plt
 from bs4 import BeautifulSoup
 
-url = input("Enter a valid URL")
+url = input("Enter a valid URL: ")
 
 while True:
   if "http" in url:
     break
   else:
-    url = input("Enter a valid URL")
+    url = input("URL must contain 'http'. Please enter a valid URL: ")
 
 response = rq.get(url)
 html = response.text
 soup = BeautifulSoup(html, 'html.parser')
-headlines = [headline.get_text() for headline in soup.find_all('h1')]
+headlines = [headline.get_text() for headline in soup.find_all('h1' or 'h2' or 'h3')]
 
+#Check if the scraper found any headlines (they exist)
 if headlines:
   print("Headlines found on the page:")
   for idx, headline in enumerate(headlines, start=1):
@@ -44,10 +45,10 @@ if headlines:
     plt.xticks(rotation=45, ha='right')
     plt.tight_layout()
     plt.show()
+    # Save the DataFrame to an Excel file
+    df.to_excel('headlines.xlsx', index=False)
+    print("DataFrame saved to 'headlines.xlsx'.")
 else:
     print("No headlines to visualize.")
 
-# Save the DataFrame to an Excel file
-df.to_excel('headlines.xlsx', index=False)
-print("DataFrame saved to 'headlines.xlsx'.")
 
