@@ -15,7 +15,7 @@ while True:
 response = rq.get(url)
 html = response.text
 soup = BeautifulSoup(html, 'html.parser')
-headlines = [headline.get_text() for headline in soup.find_all('h1' or 'h2' or 'h3')]
+headlines = [h.get_text(strip=True) for h in soup.find_all("h1")]
 
 #Check if the scraper found any headlines (they exist)
 if headlines:
@@ -35,20 +35,14 @@ if not df.empty:
     df['Length'] = df['Headlines'].apply(len)
     print("\nDataFrame with headline lengths:")
     print(df)
-# using matplotlib to visualize the lengths of the headlines
+# using matplotlib to visualize the lengths of the headlines via histogram
 if headlines:
-    plt.figure(figsize=(10, 5))
-    plt.bar(df['Headlines'], df['Length'], color='blue')
-    plt.xlabel('Headlines')
-    plt.ylabel('Length of Headline')
-    plt.title('Length of Headlines')
-    plt.xticks(rotation=45, ha='right')
-    plt.tight_layout()
+    plt.figure(figsize=(8,5))
+    plt.hist(df['Length'], bins=10, color='skyblue', edgecolor='black')
+    plt.xlabel('Length of Headline (characters)')
+    plt.ylabel('Number of Headlines')
+    plt.title('Distribution of Headline Lengths')
     plt.show()
-    # Save the DataFrame to an Excel file
-    df.to_excel('headlines.xlsx', index=False)
-    print("DataFrame saved to 'headlines.xlsx'.")
+    print("Visualization complete.")
 else:
     print("No headlines to visualize.")
-
-
